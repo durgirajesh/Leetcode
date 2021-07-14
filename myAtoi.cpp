@@ -38,10 +38,11 @@ public:
         sum=(flag ? sum : -sum);
         
         if(sum > INT_MAX)
-        	return INT_MAX;
-		else if(sum < INT_MIN)
+	     return INT_MAX;
+	else if(sum < INT_MIN)
             return INT_MIN;
+        
         else
-        	return sum;
+            return sum;
     }
 };
