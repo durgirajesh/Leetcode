@@ -3,48 +3,49 @@ public:
     string simplifyPath(string path) {
         
         int l=path.length();
+        stack<string> vec; string res;
+        res.append("/");
         
-        stack<char> st;
-        
-        for(int i=0;i<l-1;i++){
+        for(int i=0;i<l;i++){
+            string str;
             
-            if(path[i]=='/' && path[i+1]!='/'){
-                
-                st.push(path[i]);
+            while(path[i]=='/'){
+                i++;
+            }
+            while(i<path.length() && path[i]!='/'){
+                str+=path[i];
+                i++;
             }
             
-            if(path[i]!='/' && path[i]!='.'){
-                
-                st.push(path[i]);
-            }
-            
-            if(path[i]=='.'){
-                
-                while(!st.empty()){
-                    st.pop();
+            if(str.compare("..")==0){
+                if(!vec.empty()){
+                    vec.pop();
                 }
-               
+            }
+            else if(str.compare(".")==0){
+                continue;
+            }
+            
+            else if(str.length()!=0){
+                vec.push(str);
             }
         }
-
-        if(path[l-1]!='/' && path[l-1]!='.'){
-            
-            st.push(path[l-1]);
-        }
         
-        stack<char> st2;
+        stack<string> st;
+        while(!vec.empty()){
+            st.push(vec.top());
+            vec.pop();
+        }
         
         while(!st.empty()){
-            
-            st2.push(st.top());
-            st.pop();
+            if(st.size()!=1){
+                res.append(st.top()+"/");
+            }
+            else{
+                res.append(st.top());
+            }         
+            st.pop();                 
         }
-        
-        string str;
-        while(!st2.empty()){
-            str+=st2.top();
-            st2.pop();
-        }
-        return str;
+        return res;
     }
 };
