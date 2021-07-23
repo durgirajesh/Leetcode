@@ -1,29 +1,22 @@
 class Solution {
 public:
     int reverse(int x) {
-        
-        bool isneg=false;
-        
-        
-        ifx<0){
-            isneg=true;
-            x=-x;
+        bool flag=true;
+        if(x<0){
+            flag=false;
         }
         
-        long rev=0;
-        int q;
-        while(abs(x)>0){
-            q=x%10;
+        long int rev=0;
+        int n=abs(x);
+        while(n>0){
+            int q=n%10;
+            if(rev*10 > INT_MAX){
+                return 0;
+            }
             rev = (rev*10) + q;
-            x=x/10;
+            n=n/10;
         }
         
-        if(rev > INT_MAX){
-            return 0;
-        }
-        if(isneg){
-            rev=-rev;
-        }
-        return rev;
+        return (flag ? rev : -rev);
     }
 };
