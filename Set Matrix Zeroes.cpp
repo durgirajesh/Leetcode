@@ -5,13 +5,14 @@ public:
         int rows = matrix.size();
         int cols = matrix[0].size(), row, col;
         bool flag = false;
+        
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
                 if(vec[i][j]==0){
                     flag = true;
                     row = i, col = j;
                     for(int k=0;k<rows;k++){
-                    matrix[k][col] = 0;
+                        matrix[k][col] = 0;
                     }
                 }
             }
